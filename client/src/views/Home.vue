@@ -13,25 +13,25 @@
 </template>
 
 <script>
+import axios from "axios";
 import Post from "../components/Post";
 export default {
   name: 'Home',
   data: function() {
    return {
-     posts: [{
-       id: 1,
-       title: 'Look at this AWESOME Cat!',
-       imageUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/VAN_CAT.png/1200px-VAN_CAT.png',
-       content:'This is my cat LIKO!'
-     },
-     {
-       id: 2,
-       title:'RTX ON Minecraft!?',
-       imageUrl: 'https://www.somagnews.com/wp-content/uploads/2020/03/a6-2-e1585682773996.jpeg',
-       content: '2020 Graphic Cards are CHANGING the Game!'
-     },
-     ]
+     posts: []
    } 
+  },
+  created() {
+    this.getPosts()
+  },
+  methods:{
+    getPosts() {
+      axios
+      .get('http://localhost:3000')
+      .then(res => (this.posts = res.data))
+      .catch(error => console.log(error))
+    }
   },
   components: {
     Post
