@@ -28,6 +28,7 @@ const routes = [
     name: 'Fresh',
     component: Fresh
   },
+
 ]
 
 const router = new VueRouter({

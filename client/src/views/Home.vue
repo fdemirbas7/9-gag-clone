@@ -1,11 +1,17 @@
 <template>
   <div>
+    <div class="block"></div>
+    <div class="columns is-centered">
+      <add-post @created="pushPost"/>
+    </div>
     <div v-for="post in posts" :key="post.id">
-      <div class="columns is-centered"> 
+      <div class="columns is-centered">
         <div class="column is-half">
-          <post :title=post.title
-                :imageUrl=post.imageUrl
-                :content=post.content></post>
+          <post
+            :title="post.title"
+            :imageUrl="post.imageUrl"
+            :content="post.content"
+          ></post>
         </div>
       </div>
     </div>
@@ -15,26 +21,32 @@
 <script>
 import axios from "axios";
 import Post from "../components/Post";
+import AddPost from "../components/AddPost";
 export default {
-  name: 'Home',
-  data: function() {
-   return {
-     posts: []
-   } 
+  name: "Home",
+  data: function () {
+    return {
+      posts: [],
+    };
   },
   created() {
-    this.getPosts()
+    this.getPosts();
   },
-  methods:{
+  methods: {
+    pushPost(value){
+      console.log("fires")
+      this.posts.push(value)
+    },
     getPosts() {
       axios
-      .get('http://localhost:3000')
-      .then(res => (this.posts = res.data))
-      .catch(error => console.log(error))
-    }
+        .get("http://localhost:3000")
+        .then((res) => (this.posts = res.data))
+        .catch((error) => console.log(error));
+    },
   },
   components: {
-    Post
-  }
-}
+    Post,
+    AddPost,
+  },
+};
 </script>
