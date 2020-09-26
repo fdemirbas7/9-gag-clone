@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "AddPost",
@@ -70,10 +69,8 @@ export default {
       this.showModal = false;
     },
     post() {
-      axios.post('http://localhost:3000', this.newPost)
-      this.$emit("created", this.newPost)
-      this.closeModal()
-      
+      this.$store.dispatch('postPost', this.newPost)
+      this.closeModal()   
     },
   },
 };

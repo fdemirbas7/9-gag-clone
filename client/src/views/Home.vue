@@ -24,13 +24,13 @@ import Post from "../components/Post";
 import AddPost from "../components/AddPost";
 export default {
   name: "Home",
-  data: function () {
-    return {
-      posts: [],
-    };
+  computed:{
+    posts() {
+      return this.$store.state.posts
+    }
   },
   created() {
-    this.getPosts();
+    this.$store.dispatch('loadPosts')
   },
   methods: {
     pushPost(value){
